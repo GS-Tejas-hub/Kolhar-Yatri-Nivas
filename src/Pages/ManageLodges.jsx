@@ -130,7 +130,7 @@ export default function ManageLodges() {
       available: lodge.available
     });
     setImageUrls(lodge.images || []);
-    setIsFormOpen(true);
+    setIsFormOpen(false);
   };
 
   const handleSubmit = async (e) => {
@@ -188,10 +188,10 @@ export default function ManageLodges() {
           </div>
         </div>
 
-        {isFormOpen && (
+        {isFormOpen && !editingLodge && (
           <Card className="border-0 shadow-2xl mb-8">
             <CardHeader className="bg-gradient-to-r from-orange-500 to-rose-500 text-white">
-              <CardTitle>{editingLodge ? 'Edit Lodge' : 'Add New Lodge'}</CardTitle>
+              <CardTitle>Add New Lodge</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -294,6 +294,93 @@ export default function ManageLodges() {
                   <Button variant="outline" size="sm" className="flex-1" onClick={() => handleEdit(lodge)}><Edit className="w-4 h-4 mr-1" />Edit</Button>
                   <Button variant="destructive" size="sm" onClick={() => { if (confirm('Are you sure you want to delete this lodge?')) { deleteLodgeMutation.mutate(lodge.id); } }}><Trash2 className="w-4 h-4" /></Button>
                 </div>
+
+                {editingLodge && editingLodge.id === lodge.id && (
+                  <div className="mt-6 border-t pt-6">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <Label htmlFor="name_inline">Lodge Name *</Label>
+                          <Input id="name_inline" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} required className="mt-2" />
+                        </div>
+                        <div>
+                          <Label htmlFor="lodge_type_inline">Lodge Type *</Label>
+                          <Select value={formData.lodge_type} onValueChange={(value) => setFormData({...formData, lodge_type: value})}>
+                            <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="hotel_room">Hotel Room</SelectItem>
+                              <SelectItem value="cabin">Cabin</SelectItem>
+                              <SelectItem value="cottage">Cottage</SelectItem>
+                              <SelectItem value="suite">Suite</SelectItem>
+                              <SelectItem value="deluxe">Deluxe</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="price_inline">Price per Night (₹) *</Label>
+                          <Input id="price_inline" type="number" value={formData.price_per_night} onChange={(e) => setFormData({...formData, price_per_night: e.target.value})} required className="mt-2" />
+                        </div>
+                        <div>
+                          <Label htmlFor="max_guests_inline">Max Guests *</Label>
+                          <Input id="max_guests_inline" type="number" value={formData.max_guests} onChange={(e) => setFormData({...formData, max_guests: e.target.value})} required className="mt-2" />
+                        </div>
+                        <div className="md:col-span-2">
+                          <Label htmlFor="location_inline">Location</Label>
+                          <Input id="location_inline" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} placeholder="e.g., Kolhar Main Building, Floor 2" className="mt-2" />
+                        </div>
+                        <div className="md:col-span-2">
+                          <Label htmlFor="short_description_inline">Short Description</Label>
+                          <Input id="short_description_inline" value={formData.short_description} onChange={(e) => setFormData({...formData, short_description: e.target.value})} placeholder="Brief description for cards" className="mt-2" />
+                        </div>
+                        <div className="md:col-span-2">
+                          <Label htmlFor="description_inline">Full Description *</Label>
+                          <Textarea id="description_inline" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} required className="mt-2 h-32" />
+                        </div>
+                        <div className="md:col-span-2">
+                          <Label>Amenities</Label>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-2">
+                            {allAmenities.map((amenity) => (
+                              <div key={amenity} className="flex items-center space-x-2">
+                                <Checkbox id={`amenity_${amenity}`} checked={formData.amenities.includes(amenity)} onCheckedChange={() => toggleAmenity(amenity)} />
+                                <label htmlFor={`amenity_${amenity}`} className="text-sm cursor-pointer">{amenity}</label>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="md:col-span-2">
+                          <Label>Images</Label>
+                          <div className="mt-2">
+                            <Input type="file" accept="image/*" multiple onChange={handleImageUpload} className="mb-3" />
+                            {imageUrls.length > 0 && (
+                              <div className="grid grid-cols-4 gap-3">
+                                {imageUrls.map((url, index) => (
+                                  <div key={index} className="relative group">
+                                    <img src={url} alt={`Preview ${index + 1}`} className="w-full h-24 object-cover rounded-lg" />
+                                    <Button type="button" variant="destructive" size="icon" className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => setImageUrls(prev => prev.filter((_, i) => i !== index))}>
+                                      <X className="w-4 h-4" />
+                                    </Button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Checkbox id="featured_inline" checked={formData.featured} onCheckedChange={(checked) => setFormData({...formData, featured: checked})} />
+                          <label htmlFor="featured_inline" className="text-sm cursor-pointer">Featured on Home Page</label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Checkbox id="available_inline" checked={formData.available} onCheckedChange={(checked) => setFormData({...formData, available: checked})} />
+                          <label htmlFor="available_inline" className="text-sm cursor-pointer">Available for Booking</label>
+                        </div>
+                      </div>
+                      <div className="flex justify-end gap-3 pt-4 border-t">
+                        <Button type="button" variant="outline" onClick={resetForm}><X className="w-4 h-4 mr-2" />Cancel</Button>
+                        <Button type="submit" className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600"><Save className="w-4 h-4 mr-2" />Update Lodge</Button>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
