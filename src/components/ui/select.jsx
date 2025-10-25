@@ -36,7 +36,7 @@ export function SelectContent({ children }) {
   const ctx = useContext(SelectContext)
   if (!ctx.open) return null
   return (
-    <div className="absolute left-0 right-0 z-20 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-md">
+    <div className="absolute left-0 right-0 z-50 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-xl">
       {React.Children.map(children, (child) =>
         React.cloneElement(child, {})
       )}

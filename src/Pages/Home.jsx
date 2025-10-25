@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] flex items-center justify-center overflow-visible">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <img
