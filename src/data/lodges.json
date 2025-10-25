@@ -86,8 +86,7 @@
     "lodge_type": "deluxe",
     "amenities": ["Wi-Fi", "AC", "TV"],
     "images": [
-      "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=1000",
-      "https://images.unsplash.com/photo-1501117716987-c8e5d3d52f8b?w=1000"
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1000"
     ],
     "featured": true,
     "location": "Kolhar",
