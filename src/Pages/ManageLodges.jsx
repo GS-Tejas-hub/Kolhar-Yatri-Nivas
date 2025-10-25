@@ -171,16 +171,16 @@ export default function ManageLodges() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-8">
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Manage Lodges</h1>
             <p className="text-gray-600">Add, edit, or remove lodge properties</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" onClick={() => navigate(createPageUrl("AdminDashboard"))}>Back to Dashboard</Button>
-            <Button onClick={() => setIsFormOpen(true)} className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600"><Plus className="w-4 h-4 mr-2" />Add New Lodge</Button>
-            <Button variant="outline" onClick={handleBulkImport}><Upload className="w-4 h-4 mr-2" />Import Seed</Button>
-            <label className="inline-flex items-center gap-2 cursor-pointer border border-gray-300 rounded-md px-3 py-2 text-sm">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
+            <Button variant="outline" className="w-full sm:w-auto" onClick={() => navigate(createPageUrl("AdminDashboard"))}>Back to Dashboard</Button>
+            <Button onClick={() => setIsFormOpen(true)} className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600"><Plus className="w-4 h-4 mr-2" />Add New Lodge</Button>
+            <Button variant="outline" className="w-full sm:w-auto" onClick={handleBulkImport}><Upload className="w-4 h-4 mr-2" />Import Seed</Button>
+            <label className="inline-flex items-center justify-center gap-2 cursor-pointer border border-gray-300 rounded-md px-3 py-2 text-sm w-full sm:w-auto">
               <Upload className="w-4 h-4" />
               Import JSON
               <input type="file" accept="application/json" onChange={handleFileImport} className="hidden" />
