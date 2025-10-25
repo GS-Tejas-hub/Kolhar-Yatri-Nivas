@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Hotel, Home, Building2, Info, Phone, User, LogOut } from "lucide-react";
+import { Hotel, Home, Building2, Info, Phone, User, LogOut, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { base44 } from "@/api/base44Client";
 
@@ -9,6 +9,7 @@ export default function Layout({ children, currentPageName }) {
   const location = useLocation();
   const [user, setUser] = React.useState(null);
   const [isAdmin, setIsAdmin] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   React.useEffect(() => {
     const checkUser = async () => {
@@ -27,6 +28,7 @@ export default function Layout({ children, currentPageName }) {
   // Scroll to top on route change
   React.useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
+    setMobileOpen(false);
   }, [location.pathname, location.search]);
 
   const handleLogout = () => {
@@ -137,12 +139,66 @@ export default function Layout({ children, currentPageName }) {
             </nav>
 
             {/* Mobile Menu Button */}
-            <Button variant="ghost" className="md:hidden">
-              <Building2 className="w-5 h-5" />
+            <Button
+              variant="ghost"
+              className="md:hidden"
+              aria-label="Toggle menu"
+              onClick={() => setMobileOpen((v) => !v)}
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
           </div>
         </div>
       </header>
+
+      {/* Mobile Menu Panel */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black/40" onClick={() => setMobileOpen(false)}>
+          <div
+            className="absolute top-20 left-0 right-0 mx-4 rounded-2xl bg-white shadow-2xl p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col gap-2">
+              <Link to={createPageUrl("Home")}>
+                <Button variant="ghost" className={`w-full justify-start ${isActive("Home") ? "bg-orange-50 text-orange-600" : "text-gray-700"}`}>
+                  <Home className="w-4 h-4 mr-2" /> Home
+                </Button>
+              </Link>
+              <Link to={createPageUrl("Lodges")}>
+                <Button variant="ghost" className={`w-full justify-start ${isActive("Lodges") ? "bg-orange-50 text-orange-600" : "text-gray-700"}`}>
+                  <Building2 className="w-4 h-4 mr-2" /> Our Lodges
+                </Button>
+              </Link>
+              <Link to={createPageUrl("About")}>
+                <Button variant="ghost" className={`w-full justify-start ${isActive("About") ? "bg-orange-50 text-orange-600" : "text-gray-700"}`}>
+                  <Info className="w-4 h-4 mr-2" /> About Us
+                </Button>
+              </Link>
+              <Link to={createPageUrl("Contact")}>
+                <Button variant="ghost" className={`w-full justify-start ${isActive("Contact") ? "bg-orange-50 text-orange-600" : "text-gray-700"}`}>
+                  <Phone className="w-4 h-4 mr-2" /> Contact
+                </Button>
+              </Link>
+              {isAdmin && (
+                <Link to={createPageUrl("AdminDashboard")}>
+                  <Button variant="ghost" className={`w-full justify-start ${isActive("AdminDashboard") ? "bg-green-50 text-green-600" : "text-gray-700"}`}>
+                    <User className="w-4 h-4 mr-2" /> Admin
+                  </Button>
+                </Link>
+              )}
+              {user ? (
+                <Button variant="ghost" className="w-full justify-start text-gray-700" onClick={handleLogout}>
+                  <LogOut className="w-4 h-4 mr-2" /> Logout
+                </Button>
+              ) : (
+                <Button className="w-full justify-center bg-gradient-to-r from-orange-500 to-rose-500 text-white" onClick={() => base44.auth.redirectToLogin()}>
+                  Owner Login
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="min-h-[calc(100vh-320px)]">
