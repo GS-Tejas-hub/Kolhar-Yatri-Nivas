@@ -19,6 +19,8 @@ const amenityIcons = {
 
 export default function LodgeCard({ lodge }) {
   const navigate = useNavigate();
+  const fallbackImg = "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80";
+  const [imageSrc, setImageSrc] = React.useState(lodge.images?.[0] || fallbackImg);
 
   const getAmenityIcon = (amenity) => {
     const Icon = amenityIcons[amenity] || Wifi;
@@ -30,9 +32,10 @@ export default function LodgeCard({ lodge }) {
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
         <img
-          src={lodge.images?.[0] || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"}
+          src={imageSrc}
           alt={lodge.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          onError={() => setImageSrc(fallbackImg)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         

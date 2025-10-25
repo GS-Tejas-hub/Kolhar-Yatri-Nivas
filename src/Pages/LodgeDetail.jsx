@@ -117,7 +117,7 @@ export default function LodgeDetail() {
 
   const images = lodge.images?.length > 0 
     ? lodge.images 
-    : ["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"];
+    : ["https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80"];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 py-8">
