@@ -1,0 +1,108 @@
+[
+  {
+    "name": "Royal Deluxe Suite",
+    "description": "Luxurious suite with mountain views and premium amenities",
+    "short_description": "Luxurious suite with mountain views",
+    "price_per_night": 4500,
+    "max_guests": 4,
+    "lodge_type": "deluxe",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1000"],
+    "featured": true,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Premium Hotel Room",
+    "description": "Comfortable room with modern amenities and great value",
+    "short_description": "Comfortable room with great value",
+    "price_per_night": 2500,
+    "max_guests": 2,
+    "lodge_type": "hotel_room",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Cozy Mountain Cabin",
+    "description": "Rustic cabin surrounded by nature, perfect for peaceful retreat",
+    "short_description": "Rustic cabin in nature",
+    "price_per_night": 3200,
+    "max_guests": 3,
+    "lodge_type": "cabin",
+    "amenities": ["Wi-Fi", "Fireplace", "Coffee"],
+    "images": ["https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Family Cottage",
+    "description": "Spacious cottage perfect for families with multiple bedrooms",
+    "short_description": "Spacious family cottage",
+    "price_per_night": 5500,
+    "max_guests": 6,
+    "lodge_type": "cottage",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1475855581690-80accde3ae2b?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Executive Suite",
+    "description": "Professional suite with workspace and premium amenities",
+    "short_description": "Suite with workspace",
+    "price_per_night": 3800,
+    "max_guests": 2,
+    "lodge_type": "suite",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Budget Hotel Room",
+    "description": "Affordable and comfortable accommodation for budget travelers",
+    "short_description": "Affordable and comfortable",
+    "price_per_night": 1800,
+    "max_guests": 2,
+    "lodge_type": "hotel_room",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Romantic Honeymoon Suite",
+    "description": "Luxurious romantic suite perfect for honeymooners and couples",
+    "short_description": "Romantic suite for couples",
+    "price_per_night": 6500,
+    "max_guests": 2,
+    "lodge_type": "deluxe",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1501117716987-c8e5d3d52f8b?w=1000"],
+    "featured": true,
+    "location": "Kolhar",
+    "available": true
+  },
+  {
+    "name": "Garden View Cottage",
+    "description": "Peaceful cottage with stunning garden views and patio",
+    "short_description": "Cottage with garden views",
+    "price_per_night": 4200,
+    "max_guests": 4,
+    "lodge_type": "cottage",
+    "amenities": ["Wi-Fi", "AC", "TV"],
+    "images": ["https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1000"],
+    "featured": false,
+    "location": "Kolhar",
+    "available": true
+  }
+]
+
+

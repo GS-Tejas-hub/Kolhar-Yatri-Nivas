@@ -1,0 +1,71 @@
+{
+  "name": "Lodge",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the lodge or room"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the lodge"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "Brief enticing description for cards"
+    },
+    "price_per_night": {
+      "type": "number",
+      "description": "Price per night in rupees"
+    },
+    "max_guests": {
+      "type": "integer",
+      "description": "Maximum number of guests"
+    },
+    "lodge_type": {
+      "type": "string",
+      "enum": [
+        "hotel_room",
+        "cabin",
+        "cottage",
+        "suite",
+        "deluxe"
+      ],
+      "description": "Type of accommodation"
+    },
+    "amenities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of amenities (Wi-Fi, Pool, AC, etc.)"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "URLs of lodge images"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to show on home page"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location description"
+    },
+    "available": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the lodge is available for booking"
+    }
+  },
+  "required": [
+    "name",
+    "price_per_night",
+    "max_guests",
+    "lodge_type"
+  ]
+}
